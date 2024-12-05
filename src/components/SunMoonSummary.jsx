@@ -1,8 +1,7 @@
 import React from "react";
 import { Sunrise, Sunset, Moon, Sun } from 'lucide-react';
 
-const SunMoonSummary = ({ location }) => {
-  // Mock data - in a real app, this would come from an API
+const SunMoonSummary = ({ location, isDarkMode }) => {
   const sunMoonData = {
     sunrise: "5:43 AM",
     sunset: "6:30 PM",
@@ -11,44 +10,43 @@ const SunMoonSummary = ({ location }) => {
   };
 
   return (
-    <div className="bg-white/80 backdrop-blur-md p-6 rounded-xl shadow-lg hover:shadow-xl transition-all">
-      <div className="mb-4">
-        <div className="text-xl font-semibold text-gray-600">Sun & Moon</div>
-        <div className="text-sm text-gray-500">{location} Summary</div>
+    <div className={`
+      ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'} 
+      p-4 rounded-lg shadow-md flex flex-col space-y-3
+    `}>
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl font-semibold">{location}</h2>
+        <div className="flex items-center space-x-2">
+          <Sun className="w-6 h-6 text-yellow-500" />
+          <Moon className="w-5 h-5 text-blue-400" />
+        </div>
       </div>
-      
-      <div className="space-y-4">
-        <div className="flex items-center justify-between bg-blue-50 p-4 rounded-lg">
-          <div className="flex items-center space-x-3">
-            <Sunrise size={24} className="text-orange-500" />
-            <div>
-              <div className="font-medium text-gray-700">Sunrise</div>
-              <div className="text-sm text-gray-500">{sunMoonData.sunrise}</div>
-            </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div className="flex items-center space-x-2">
+          <Sunrise className="w-5 h-5" />
+          <div>
+            <p className="text-sm font-medium">Sunrise</p>
+            <p className="font-bold">{sunMoonData.sunrise}</p>
           </div>
-          <Sun size={24} className="text-yellow-500" />
         </div>
-        
-        <div className="flex items-center justify-between bg-blue-50 p-4 rounded-lg">
-          <div className="flex items-center space-x-3">
-            <Sunset size={24} className="text-orange-500" />
-            <div>
-              <div className="font-medium text-gray-700">Sunset</div>
-              <div className="text-sm text-gray-500">{sunMoonData.sunset}</div>
-            </div>
+
+        <div className="flex items-center space-x-2">
+          <Sunset className="w-5 h-5" />
+          <div>
+            <p className="text-sm font-medium">Sunset</p>
+            <p className="font-bold">{sunMoonData.sunset}</p>
           </div>
-          <Moon size={24} className="text-indigo-500" />
         </div>
-        
-        <div className="flex items-center justify-between bg-blue-50 p-4 rounded-lg">
-          <div className="flex items-center space-x-3">
-            <Sun size={24} className="text-yellow-500" />
-            <div>
-              <div className="font-medium text-gray-700">Day Length</div>
-              <div className="text-sm text-gray-500">{sunMoonData.dayLength}</div>
-            </div>
-          </div>
-          <Moon size={24} className="text-indigo-500" />
+
+        <div>
+          <p className="text-sm font-medium">Day Length</p>
+          <p className="font-bold">{sunMoonData.dayLength}</p>
+        </div>
+
+        <div>
+          <p className="text-sm font-medium">Moon Phase</p>
+          <p className="font-bold">{sunMoonData.moonPhase}</p>
         </div>
       </div>
     </div>

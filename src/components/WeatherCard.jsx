@@ -8,7 +8,7 @@ import {
   CloudFog
 } from 'lucide-react';
 
-const WeatherCard = ({ location }) => {
+const WeatherCard = ({ location, isDarkMode }) => {
   // Mock data - in a real app, this would come from an API
   const weatherData = {
     temperature: 12,
@@ -31,21 +31,47 @@ const WeatherCard = ({ location }) => {
   const WeatherIcon = weatherIcons[weatherData.description] || CloudRain;
 
   return (
-    <div className="bg-white/80 backdrop-blur-md p-6 rounded-xl shadow-lg hover:shadow-xl transition-all">
+    <div className={`
+      ${isDarkMode 
+        ? 'bg-gray-800/60 text-gray-100 border-gray-700' 
+        : 'bg-white/80 text-gray-900'}
+      backdrop-blur-md p-6 rounded-xl shadow-lg hover:shadow-xl 
+      transition-all border border-opacity-10
+    `}>
       <div className="flex justify-between items-center mb-4">
         <div>
-          <div className="text-xl font-semibold text-gray-600">{location}</div>
-          <div className="text-sm text-gray-500">Current Weather</div>
+          <div className={`
+            text-xl font-semibold 
+            ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}
+          `}>
+            {location}
+          </div>
+          <div className={`
+            text-sm 
+            ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}
+          `}>
+            Current Weather
+          </div>
         </div>
         <WeatherIcon 
           size={40} 
-          className="text-blue-500 opacity-70" 
+          className={`
+            ${isDarkMode ? 'text-blue-300' : 'text-blue-500'} 
+            opacity-70
+          `}
         />
       </div>
       
       <div className="text-center mb-4">
-        <h1 className="text-5xl font-bold text-blue-600">{weatherData.temperature}°</h1>
-        <p className="text-gray-600">
+        <h1 className={`
+          text-5xl font-bold 
+          ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}
+        `}>
+          {weatherData.temperature}°
+        </h1>
+        <p className={`
+          ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}
+        `}>
           {weatherData.description}, Feels like {weatherData.feelsLike}°
         </p>
       </div>
@@ -60,12 +86,34 @@ const WeatherCard = ({ location }) => {
         ].map(({ icon: Icon, label, value }, index) => (
           <div 
             key={index} 
-            className="flex items-center space-x-2 bg-blue-50 p-3 rounded-lg"
+            className={`
+              flex items-center space-x-2 
+              ${isDarkMode 
+                ? 'bg-gray-700/50 text-gray-100' 
+                : 'bg-blue-50 text-gray-900'}
+              p-3 rounded-lg
+            `}
           >
-            <Icon size={20} className="text-blue-500 opacity-70" />
+            <Icon 
+              size={20} 
+              className={`
+                ${isDarkMode ? 'text-blue-300' : 'text-blue-500'} 
+                opacity-70
+              `} 
+            />
             <div>
-              <div className="text-xs text-gray-500">{label}</div>
-              <div className="font-semibold text-gray-700">{value}</div>
+              <div className={`
+                text-xs 
+                ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}
+              `}>
+                {label}
+              </div>
+              <div className={`
+                font-semibold 
+                ${isDarkMode ? 'text-gray-100' : 'text-gray-700'}
+              `}>
+                {value}
+              </div>
             </div>
           </div>
         ))}
