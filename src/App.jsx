@@ -4,6 +4,7 @@ import WeatherCard from "./components/WeatherCard";
 import ForecastCard from "./components/ForecastCard";
 import SunMoonSummary from "./components/SunMoonSummary";
 import "./index.css";
+import WeatherRecommendation from "./components/WeatherRecommendation";
 
 function App() {
   const [location, setLocation] = useState("New York");
@@ -52,6 +53,9 @@ function App() {
           location={location} 
           isDarkMode={isDarkMode} 
         />
+      </div>
+      <div>
+        <WeatherRecommendation meteoOfTheDay={32} darkMode={isDarkMode} />
       </div>
     </div>
   );
