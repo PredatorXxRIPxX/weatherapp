@@ -29,7 +29,7 @@ function App() {
   };
 
   return (
-    <>
+    <div className={`${isDarkMode?'bg-slate-900':'bg-white-200'}`}>
 
       <Navbar
         onLocationSearch={handleLocationChange}
@@ -37,7 +37,7 @@ function App() {
         isDarkMode={isDarkMode}
         toggleDarkMode={toggleDarkMode}
       />
-      <div className="container mx-auto h-full rounded-xl border-2 border-red-500 flex p-6 ">
+      <div className="container mx-auto h-full rounded-xl  flex p-4 ">
           <div className=" w-4/5">
             <div className="grid grid-cols-4 gap-2">
               <div className="col-span-2 h-full ">
@@ -45,7 +45,7 @@ function App() {
               </div>
               <div className="col-span-1">
                 <SunMoonSummary isDarkMode={isDarkMode} location={location} />
-                <button className="bg-blue-500 text-white p-2 rounded-lg w-full mt-4">Ajouter une ville</button>
+                <button className="bg-blue-500 text-white p-2 rounded-lg w-full mt-4  hover:scale-105 transition-all ease-in-out duration-300 ">Ajouter une ville</button>
               </div>
               <ForecastCard isDarkMode={isDarkMode} location={location} />
             </div>
@@ -61,7 +61,7 @@ function App() {
           <SideBar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
       </div>
 
-    </>
+    </div>
   );
 }
 

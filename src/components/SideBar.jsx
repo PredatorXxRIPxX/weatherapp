@@ -10,7 +10,7 @@ export default function SideBar({ isDarkMode, toggleDarkMode }) {
 
   return (
     <div 
-      className={`
+      className={`${isDarkMode?'bg-gray-800/60 text-gray-100':'bg-white/80 text-gray-900'}
         transition-all duration-300 ease-in-out
         flex flex-col items-start
         w-64
@@ -26,7 +26,7 @@ export default function SideBar({ isDarkMode, toggleDarkMode }) {
           p-4
         `}
       >
-        <div className={`${isDarkMode?'text-white':'text-black'} font-medium text-2xl text-center`}>
+        <div className={`${isDarkMode?'text-white':'text-gray-800/60'} font-medium text-2xl text-center`}>
             Weekly records
         </div>
         

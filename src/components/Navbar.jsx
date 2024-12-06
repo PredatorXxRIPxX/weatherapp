@@ -26,7 +26,7 @@ const Navbar = ({
           ? "bg-gray-800/60 text-gray-100"
           : "bg-white/80 text-gray-900"
       }
-      backdrop-blur-md shadow-md rounded-xl border-b border-gray-200 m-5
+      backdrop-blur-md shadow-md rounded-xl  m-5
     `}
       >
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
