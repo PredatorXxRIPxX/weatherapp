@@ -8,7 +8,7 @@ const SunMoonSummary = ({ location, isDarkMode }) => {
   const fetchData = async (location) => {
     try {
       const response = await axios.get(`http://localhost:5000/api/temperature/${location}`);    
-      setFetchResponse(response.data);
+      setFetchResponse(response.data.weatherData);
       console.log("sunmon", response.data);
     } catch (error) {
       console.error('Error fetching weather data:', error);
@@ -40,7 +40,7 @@ const SunMoonSummary = ({ location, isDarkMode }) => {
   const sunMoonData = {
     sunrise: fetchResponse?.sys?.sunrise ? formatTime(fetchResponse.sys.sunrise) : "N/A",
     sunset: fetchResponse?.sys?.sunset ? formatTime(fetchResponse.sys.sunset) : "N/A",
-    moonPhase: "Waxing Gibbous", // Note: OpenWeatherMap API doesn't provide moon phase
+    moonPhase: "Waxing Gibbous",
     dayLength: fetchResponse?.sys?.sunrise && fetchResponse?.sys?.sunset 
       ? calculateDayLength(fetchResponse.sys.sunrise, fetchResponse.sys.sunset) 
       : "N/A"
