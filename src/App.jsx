@@ -29,7 +29,7 @@ function App() {
   };
 
   return (
-    <div className={`${isDarkMode?'bg-slate-900':'bg-white-200'}`}>
+    <div className={`${isDarkMode?'bg-slate-900':'bg-white'} h-full`}>
 
       <Navbar
         onLocationSearch={handleLocationChange}
