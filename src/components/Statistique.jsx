@@ -49,26 +49,23 @@ export default function Statistique({ isDarkMode, city, data }) {
     };
 
     useEffect(() => {
-        // Create first chart
         const chartOne = new ApexCharts(document.querySelector("#chart1"), firstChartOptions);
         chartOne.render();
 
-        // Create second chart
         const chartTwo = new ApexCharts(document.querySelector("#chart2"), secondChartOptions);
         chartTwo.render();
 
-        // Cleanup function
         return () => {
             chartOne.destroy();
             chartTwo.destroy();
         };
-    }, [data]); // Re-render charts when data changes
+    }, [data]); 
 
     return (
         <div className={`
             ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}
             w-full mt-3 p-6 rounded-lg shadow-lg
-            flex flex-col space-y-4 border-2 border-red-500
+            flex flex-col space-y-4
             h-full
         `}>
             <div className="flex justify-between items-center">

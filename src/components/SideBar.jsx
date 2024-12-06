@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Sun, 
-  Moon 
+  Moon, 
 } from 'lucide-react';
 
 
@@ -22,18 +22,14 @@ export default function SideBar({ isDarkMode, toggleDarkMode }) {
       <div 
         className={`
           w-full overflow-hidden 
-          ${isExpanded ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}
           transition-all duration-300 ease-in-out
+          p-4
         `}
       >
-        <h2 
-          className={`
-            text-xl font-bold p-4 
-            ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}
-          `}
-        >
-          Weekly Forecast
-        </h2>
+        <div className={`${isDarkMode?'text-white':'text-black'} font-medium text-2xl text-center`}>
+            Weekly records
+        </div>
+        
         
       </div>
     </div>

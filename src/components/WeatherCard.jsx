@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 
 const WeatherCard = ({ location, isDarkMode }) => {
-  // Mock data - in a real app, this would come from an API
+  
   const weatherData = {
     temperature: 12,
     feelsLike: 10,
