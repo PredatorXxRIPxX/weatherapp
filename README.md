@@ -115,8 +115,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📞 Contact
 
-Your Name - [Your Email]
-Project Link: [https://github.com/yourusername/weathersync](https://github.com/yourusername/weathersync)
+Your Name - wassimou009@gmail.com
+
 
 ## 🙏 Acknowledgements
 
