@@ -46,61 +46,63 @@ function App() {
   };
 
   return (
-    <div className={`${isDarkMode ? 'bg-slate-900 text-white' : 'bg-white text-black'} min-h-screen`}>
+    <div className={`
+      ${isDarkMode ? 'bg-slate-900 text-white' : 'bg-white text-black'} 
+      min-h-screen w-full overflow-x-hidden
+    `}>
       <Navbar
         onLocationSearch={handleLocationChange}
         currentLocation={location}
         isDarkMode={isDarkMode}
         toggleDarkMode={toggleDarkMode}
       />
+      
       <div className="container mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
           {/* Main Weather Section */}
-          <div className="md:col-span-3 space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="md:col-span-2">
-                <WeatherCard 
-                  isDarkMode={isDarkMode} 
-                  location={location} 
-                  data={weatherData} 
-                  className="h-full"
+          <div className="xl:col-span-4 space-y-6">
+            {/* Top Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="md:col-span-1 lg:col-span-2">
+                <WeatherCard
+                  isDarkMode={isDarkMode}
+                  location={location}
+                  data={weatherData}
+                  className="h-full w-full"
                 />
               </div>
               <div>
-                <SunMoonSummary 
-                  isDarkMode={isDarkMode} 
-                  location={location} 
-                  className="h-full"
+                <SunMoonSummary
+                  isDarkMode={isDarkMode}
+                  location={location}
+                  className="h-full w-full"
                 />
               </div>
-              <div className="md:col-span-3">
-                <ForecastCard 
-                  isDarkMode={isDarkMode} 
-                  location={location} 
+              <div className="col-span-full">
+                <ForecastCard
+                  isDarkMode={isDarkMode}
+                  location={location}
                 />
               </div>
             </div>
 
-            {/* Bottom Section */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="md:col-span-2">
-                <Statistique 
-                  isDarkMode={isDarkMode} 
-                  city={location} 
-                  data={{cases: 100, deaths: 20, recovered: 80}} 
+            {/* Bottom Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Statistique
+                  isDarkMode={isDarkMode}
+                  city={location}
+                  className="w-full"
                 />
               </div>
               <div>
-                <WeatherRecommendation 
-                  isDarkMode={isDarkMode} 
-                  location={location} 
+                <WeatherRecommendation
+                  isDarkMode={isDarkMode}
+                  location={location}
+                  className="w-full"
                 />
               </div>
             </div>
-          </div>
-
-          <div className="hidden md:block md:col-span-1">
-           
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import ApexCharts from 'apexcharts';
 import axios from 'axios';
 
-export default function Statistique({ isDarkMode, city, data }) {
+export default function Statistique({ isDarkMode, city}) {
     const [staticList, setStaticList] = useState([]);
 
     const fetchChatData = async (location) => {
