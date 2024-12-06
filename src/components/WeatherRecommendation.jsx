@@ -85,7 +85,7 @@ export default function WeatherRecommendation({ meteoOfTheDay, darkMode }) {
       <div className="mt-4">
         <p className="text-sm italic">
           Temperature: {meteoOfTheDay.temperature}°F | 
-          Condition: {meteoOfTheDay.condition}
+          Condition: {}
         </p>
       </div>
 

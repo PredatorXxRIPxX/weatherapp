@@ -5,6 +5,8 @@ import ForecastCard from "./components/ForecastCard";
 import SunMoonSummary from "./components/SunMoonSummary";
 import "./index.css";
 import WeatherRecommendation from "./components/WeatherRecommendation";
+import SideBar from "./components/SideBar";
+import Statistique from "./components/Statistique";
 
 function App() {
   const [location, setLocation] = useState("New York");
@@ -12,9 +14,9 @@ function App() {
 
   useEffect(() => {
     if (isDarkMode) {
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove("dark");
     }
   }, [isDarkMode]);
 
@@ -27,37 +29,39 @@ function App() {
   };
 
   return (
-    <div className={`
-      min-h-screen 
-      ${isDarkMode 
-        ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100' 
-        : 'bg-gradient-to-br from-blue-100 to-blue-200 text-gray-900'}
-      transition-colors duration-300 ease-in-out
-    `}>
-      <Navbar 
-        onLocationSearch={handleLocationChange} 
+    <>
+
+      <Navbar
+        onLocationSearch={handleLocationChange}
         currentLocation={location}
         isDarkMode={isDarkMode}
         toggleDarkMode={toggleDarkMode}
       />
-      <div className="container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <WeatherCard 
-          location={location} 
-          isDarkMode={isDarkMode} 
-        />
-        <ForecastCard 
-          location={location} 
-          isDarkMode={isDarkMode} 
-        />
-        <SunMoonSummary 
-          location={location} 
-          isDarkMode={isDarkMode} 
-        />
+      <div className="container mx-auto h-full rounded-xl border-2 border-red-500 flex p-6 ">
+          <div className=" w-4/5">
+            <div className="grid grid-cols-4 gap-2">
+              <div className="col-span-2 h-full ">
+                <WeatherCard isDarkMode={isDarkMode} location={location} />
+              </div>
+              <div className="col-span-1">
+                <SunMoonSummary isDarkMode={isDarkMode} location={location} />
+                <button className="bg-blue-500 text-white p-2 rounded-lg w-full mt-4">Ajouter une ville</button>
+              </div>
+              <ForecastCard isDarkMode={isDarkMode} location={location} />
+            </div>
+            <div className="w-full grid gap-2 grid-cols-6">
+              <div className=" col-span-4">
+                <Statistique isDarkMode={isDarkMode} city={location} data={{cases: 100, deaths: 20, recovered: 80}} />
+              </div>
+              <div className=" col-span-2">
+                <WeatherRecommendation isDarkMode={isDarkMode} meteoOfTheDay={{temperature:32 , condition: "hello"}} />
+              </div>
+            </div>
+          </div>
+          <SideBar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
       </div>
-      <div>
-        <WeatherRecommendation meteoOfTheDay={32} darkMode={isDarkMode} />
-      </div>
-    </div>
+
+    </>
   );
 }
 

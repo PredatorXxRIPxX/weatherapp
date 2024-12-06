@@ -35,6 +35,7 @@ const WeatherCard = ({ location, isDarkMode }) => {
       ${isDarkMode 
         ? 'bg-gray-800/60 text-gray-100 border-gray-700' 
         : 'bg-white/80 text-gray-900'}
+      h-full
       backdrop-blur-md p-6 rounded-xl shadow-lg hover:shadow-xl 
       transition-all border border-opacity-10
     `}>
