@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import { 
   Wind, 
   Droplet, 
@@ -7,19 +7,37 @@ import {
   Thermometer,
   CloudFog
 } from 'lucide-react';
+import axios from "axios";
+
 
 const WeatherCard = ({ location, isDarkMode }) => {
+
+  const [weather, setWeatherData] = useState(null);
+
+  const fetchWeatherData = async (location) => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/weather/' + location);
+      setWeatherData(response.data);
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (location) {
+      fetchWeatherData(location);
+    }
+  },[location])
   
   const weatherData = {
-    temperature: 12,
-    feelsLike: 10,
-    description: "Rainy",
+    temperature: weather?.main.temp || 72,
+    feelsLike: weather?.main.feelsLike || 70,
+    description: weather?.weather[0].description || "Rainy",
     details: {
-      airQuality: 156,
-      windSpeed: 1,
-      humidity: 54,
-      visibility: 3,
-      pressure: 27.65
+      windSpeed: weather?.wind.speed || 5,
+      humidity: weather?.main.humidity || 50,
+      visibility: weather?.visibility || 10,
+      pressure: weather?.main.pressure || 1012
     }
   };
 
@@ -30,12 +48,13 @@ const WeatherCard = ({ location, isDarkMode }) => {
 
   const WeatherIcon = weatherIcons[weatherData.description] || CloudRain;
 
+
   return (
     <div className={`
       ${isDarkMode 
         ? 'bg-gray-800/60 text-gray-100 border-gray-700' 
         : 'bg-white/80 text-gray-900'}
-      h-full
+      h-fit-content
       backdrop-blur-md p-6 rounded-xl shadow-lg hover:shadow-xl 
       transition-all border border-opacity-10
     `}>
@@ -82,7 +101,6 @@ const WeatherCard = ({ location, isDarkMode }) => {
           { icon: Wind, label: "Wind", value: `${weatherData.details.windSpeed} mph` },
           { icon: Droplet, label: "Humidity", value: `${weatherData.details.humidity}%` },
           { icon: Eye, label: "Visibility", value: `${weatherData.details.visibility} mi` },
-          { icon: CloudFog, label: "Air Quality", value: weatherData.details.airQuality },
           { icon: Thermometer, label: "Pressure", value: `${weatherData.details.pressure} in` }
         ].map(({ icon: Icon, label, value }, index) => (
           <div 

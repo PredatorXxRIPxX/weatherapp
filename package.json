@@ -11,7 +11,13 @@
   },
   "dependencies": {
     "apexcharts": "^4.1.0",
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "framer-motion": "^11.13.1",
+    "groq": "^3.66.0",
+    "groq-sdk": "^0.9.0",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.468.0",
     "react": "^18.3.1",

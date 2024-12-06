@@ -5,9 +5,14 @@ import {
 } from 'lucide-react';
 
 
-export default function SideBar({ isDarkMode, toggleDarkMode }) {
+
+export default function SideBar({ isDarkMode, location }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  useEffect(()=>{
+    console.log('SideBar rendered');
+  }, [location]);
+  
   return (
     <div 
       className={`${isDarkMode?'bg-gray-800/60 text-gray-100':'bg-white/80 text-gray-900'}
@@ -17,6 +22,7 @@ export default function SideBar({ isDarkMode, toggleDarkMode }) {
         shadow-lg
         rounded-xl
         ml-4
+        
       `}
     >
       <div 

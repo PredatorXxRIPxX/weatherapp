@@ -5,12 +5,14 @@ import ForecastCard from "./components/ForecastCard";
 import SunMoonSummary from "./components/SunMoonSummary";
 import "./index.css";
 import WeatherRecommendation from "./components/WeatherRecommendation";
-import SideBar from "./components/SideBar";
 import Statistique from "./components/Statistique";
+import axios from "axios";
 
 function App() {
   const [location, setLocation] = useState("New York");
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [weatherData, setWeatherData] = useState(null);
+  const [chatresponse, setChatresponse] = useState(null);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -19,6 +21,21 @@ function App() {
       document.documentElement.classList.remove("dark");
     }
   }, [isDarkMode]);
+
+  const fetchChatData = async (location) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/temperature/${location}`);
+      setChatresponse(response.data);
+    } catch (error) {
+      console.error('Error fetching chat data:', error);
+    }
+  }
+
+  useEffect(() => {
+    if (location) {
+      fetchChatData(location);
+    }
+  }, [location]);
 
   const handleLocationChange = (newLocation) => {
     setLocation(newLocation);
@@ -29,38 +46,64 @@ function App() {
   };
 
   return (
-    <div className={`${isDarkMode?'bg-slate-900':'bg-white'} h-full`}>
-
+    <div className={`${isDarkMode ? 'bg-slate-900 text-white' : 'bg-white text-black'} min-h-screen`}>
       <Navbar
         onLocationSearch={handleLocationChange}
         currentLocation={location}
         isDarkMode={isDarkMode}
         toggleDarkMode={toggleDarkMode}
       />
-      <div className="container mx-auto h-full rounded-xl  flex p-4 ">
-          <div className=" w-4/5">
-            <div className="grid grid-cols-4 gap-2">
-              <div className="col-span-2 h-full ">
-                <WeatherCard isDarkMode={isDarkMode} location={location} />
+      <div className="container mx-auto px-4 py-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {/* Main Weather Section */}
+          <div className="md:col-span-3 space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="md:col-span-2">
+                <WeatherCard 
+                  isDarkMode={isDarkMode} 
+                  location={location} 
+                  data={weatherData} 
+                  className="h-full"
+                />
               </div>
-              <div className="col-span-1">
-                <SunMoonSummary isDarkMode={isDarkMode} location={location} />
-                <button className="bg-blue-500 text-white p-2 rounded-lg w-full mt-4  hover:scale-105 transition-all ease-in-out duration-300 ">Ajouter une ville</button>
+              <div>
+                <SunMoonSummary 
+                  isDarkMode={isDarkMode} 
+                  location={location} 
+                  className="h-full"
+                />
               </div>
-              <ForecastCard isDarkMode={isDarkMode} location={location} />
+              <div className="md:col-span-3">
+                <ForecastCard 
+                  isDarkMode={isDarkMode} 
+                  location={location} 
+                />
+              </div>
             </div>
-            <div className="w-full grid gap-2 grid-cols-6">
-              <div className=" col-span-4">
-                <Statistique isDarkMode={isDarkMode} city={location} data={{cases: 100, deaths: 20, recovered: 80}} />
+
+            {/* Bottom Section */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="md:col-span-2">
+                <Statistique 
+                  isDarkMode={isDarkMode} 
+                  city={location} 
+                  data={{cases: 100, deaths: 20, recovered: 80}} 
+                />
               </div>
-              <div className=" col-span-2">
-                <WeatherRecommendation isDarkMode={isDarkMode} meteoOfTheDay={{temperature:32 , condition: "hello"}} />
+              <div>
+                <WeatherRecommendation 
+                  isDarkMode={isDarkMode} 
+                  location={location} 
+                />
               </div>
             </div>
           </div>
-          <SideBar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-      </div>
 
+          <div className="hidden md:block md:col-span-1">
+           
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
